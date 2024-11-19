@@ -1,7 +1,7 @@
-apiVersion: apps/v1
-kind: pod
+apiVersion: v1
+kind: Pod
 metadata:
-  name: mysql
+  name: mysql-pod
   labels:
     app: mysql
 spec:
