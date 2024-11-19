@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config-exercise
+data:
+  nginx.conf: |
+    events {}
+    http {
+      server {
+        listen 80;
+        location / {
+          proxy_pass http://flask-service-exercise:5000;
+        }
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-exercise
+  labels:
+    app: nginx-exercise
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: nginx-exercise
+  strategy:
+    rollingUpdate:
+      maxSurge: 10%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: nginx-exercise
+    spec:
+      volumes:
+      - name: nginx-volume-exercise
+        configMap:
+          name: nginx-config-exercise
+      containers:
+      - name: nginx-exercise
+        image: nginx:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nginx-volume-exercise
+          mountPath: /etc/nginx/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service-exercise
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx-exercise
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
