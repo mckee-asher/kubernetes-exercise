@@ -22,11 +22,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-service-exercise
+  name: mysql-service
 spec:
   type: ClusterIP
   selector:
-    app: mysql-exercise
+    app: mysql
   ports:
   - protocol: TCP
     port: 3306
