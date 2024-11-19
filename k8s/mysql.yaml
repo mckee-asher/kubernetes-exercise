@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql-deployment-exercise
+  name: mysql-deployment
   labels:
-    app: mysql-exercise
+    app: mysql
 spec:
   containers:
-  - name: mysql-exercise
+  - name: mysql
     image: amckee457/db-kubernetes
     ports:
     - containerPort: 3306
@@ -14,11 +14,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-service-exercise
+  name: mysql-service
 spec:
   type: ClusterIP
   selector:
-    app: mysql-exercise
+    app: mysql
   ports:
   - protocol: TCP
     port: 3306
