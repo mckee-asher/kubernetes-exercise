@@ -5,12 +5,11 @@ metadata:
   labels:
     app: mysql-exercise
 spec:
-  spec:
-    containers:
-    - name: mysql-exercise
-      image: amckee457/db-kubernetes
-      ports:
-      - containerPort: 3306
+  containers:
+  - name: mysql-exercise
+    image: amckee457/db-kubernetes
+    ports:
+    - containerPort: 3306
 ---
 apiVersion: v1
 kind: Service
