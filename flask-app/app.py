@@ -20,7 +20,7 @@ class Users(db.Model):
 		return ''.join(['User ID: ', str(self.id), '\r\n', 'Email: ', self.email, ' Name: ', self.first_name, ' ', self.last_name, '\n'])
 
 
-@app.route('/')
+@app.route('/home')
 def hello():
   data1 = Users.query.all()
   return render_template('home.html', data1=data1)
