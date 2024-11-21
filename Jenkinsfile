@@ -4,8 +4,8 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                docker build -t amckee457/flask-app-kubernetes:latest -t amckee457/flask-app-kubernetes:v${BUILD_NUMBER} .
-                docker build -t amckee457/db-kubernetes:latest -t amckee457/db-kubernetes:v${BUILD_NUMBER} .
+                docker build -t amckee457/flask-app-kubernetes:latest -t amckee457/flask-app-kubernetes:v${BUILD_NUMBER} ./flask-app
+                docker build -t amckee457/db-kubernetes:latest -t amckee457/db-kubernetes:v${BUILD_NUMBER} ./db
                 '''
             }
         }
